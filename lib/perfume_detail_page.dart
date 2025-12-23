@@ -229,39 +229,6 @@ class PerfumeDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // IMAGE
-            Center(
-              child: SizedBox(
-                width: 160,
-                height: 220,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: perfume.hasNetworkImage
-                      ? Image.network(
-                          perfume.imageUrl!,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) =>
-                              Container(color: cs.primary.withOpacity(0.12)),
-                        )
-                      : (perfume.hasLocalAsset
-                            ? Image.asset(
-                                perfume.localAsset!,
-                                fit: BoxFit.cover,
-                              )
-                            : Container(
-                                color: cs.primary.withOpacity(0.08),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.local_florist_rounded,
-                                    size: 60,
-                                  ),
-                                ),
-                              )),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-
             // TITLE + BRAND
             Text(
               perfume.perfume,
