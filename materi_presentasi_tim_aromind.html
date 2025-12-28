@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Materi Presentasi Tim Aromind AI</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 50px; 
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.7;
+            color: #333;
+            background: #fff;
+        }
+        h1 { 
+            color: #007B66; 
+            border-bottom: 3px solid #007B66;
+            padding-bottom: 15px;
+            margin-top: 50px;
+            font-size: 28px;
+        }
+        h1:first-child { margin-top: 0; }
+        h2 { 
+            color: #2A8F77;
+            margin-top: 40px;
+            font-size: 20px;
+            border-left: 4px solid #007B66;
+            padding-left: 15px;
+        }
+        h3 { 
+            color: #444;
+            font-size: 16px;
+            margin-top: 25px;
+        }
+        table { 
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-size: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th { 
+            background: linear-gradient(135deg, #007B66, #2A8F77);
+            color: white;
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td { 
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            vertical-align: top;
+        }
+        tr:nth-child(even) { background-color: #f8faf9; }
+        tr:hover { background-color: #e8f5f1; }
+        code { 
+            background-color: #f0f4f3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 11px;
+            color: #c7254e;
+        }
+        pre { 
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        hr { 
+            margin: 40px 0;
+            border: 0;
+            border-top: 2px dashed #ddd;
+        }
+        strong { color: #007B66; }
+        p { margin: 15px 0; }
+        @media print {
+            body { padding: 20px; font-size: 11px; }
+            h1 { font-size: 22px; page-break-before: always; }
+            h1:first-child { page-break-before: avoid; }
+            table { font-size: 10px; page-break-inside: avoid; }
+            pre { font-size: 9px; }
+        }
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007B66;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,123,102,0.3);
+        }
+        .print-btn:hover { background: #005a4c; }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+<h1 id="materi-presentasi-tim-aromind-ai">Materi Presentasi Tim Aromind AI</h1>
+<h2 id="struktur-point-utama-tabel-bukti-per-baris">Struktur: Point Utama → Tabel Bukti Per Baris</h2>
+<hr />
+<h1 id="1-uiux-designer-documentation">🎨 1. UI/UX Designer &amp; Documentation</h1>
+<h2 id="11-color-palette-design">1.1 Color Palette Design</h2>
+<p><strong>Point:</strong> Menggunakan palet warna mint/teal yang konsisten untuk branding parfum yang segar dan natural.</p>
+<p><strong>File:</strong> <code>lib/colors.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">6</td>
+<td><code>static const Color primary = Color(0xFF007B66);</code></td>
+<td>Warna utama mint/teal deep</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td><code>static const Color primaryContainer = Color(0xFFDFF8F4);</code></td>
+<td>Container light untuk primary</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td><code>static const Color secondary = Color(0xFF2A8F77);</code></td>
+<td>Warna sekunder hijau teal</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td><code>static const Color accent = Color(0xFF00BFA6);</code></td>
+<td>Warna aksen untuk highlight/CTA</td>
+</tr>
+<tr>
+<td style="text-align: center;">13</td>
+<td><code>static const Color background = Color(0xFFF1FFF8);</code></td>
+<td>Background app mint sangat terang</td>
+</tr>
+<tr>
+<td style="text-align: center;">17</td>
+<td><code>static const Color darkPrimary = Color(0xFF0E5A4F);</code></td>
+<td>Primary untuk dark mode</td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td><code>static const Color danger = Color(0xFFE53935);</code></td>
+<td>Warna merah untuk error</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-theme-typography-configuration">1.2 Theme &amp; Typography Configuration</h2>
+<p><strong>Point:</strong> Menggunakan Material Design 3 dengan font Poppins untuk tampilan modern dan profesional.</p>
+<p><strong>File:</strong> <code>lib/app_theme.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">3</td>
+<td><code>import 'package:google_fonts/google_fonts.dart';</code></td>
+<td>Import Google Fonts library</td>
+</tr>
+<tr>
+<td style="text-align: center;">18</td>
+<td><code>useMaterial3: true</code></td>
+<td>Aktifkan Material Design 3</td>
+</tr>
+<tr>
+<td style="text-align: center;">21</td>
+<td><code>textTheme: GoogleFonts.poppinsTextTheme()</code></td>
+<td>Font Poppins sebagai typography utama</td>
+</tr>
+<tr>
+<td style="text-align: center;">25-28</td>
+<td><code>contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 16)</code></td>
+<td>Padding input field</td>
+</tr>
+<tr>
+<td style="text-align: center;">29-31</td>
+<td><code>borderRadius: BorderRadius.circular(14)</code></td>
+<td>Input field dengan sudut 14px</td>
+</tr>
+<tr>
+<td style="text-align: center;">36-42</td>
+<td><code>CardThemeData(elevation: 6, borderRadius: 22)</code></td>
+<td>Card dengan shadow level 6 dan sudut 22px</td>
+</tr>
+<tr>
+<td style="text-align: center;">48-50</td>
+<td><code>borderRadius: BorderRadius.circular(18)</code></td>
+<td>Button dengan sudut 18px</td>
+</tr>
+<tr>
+<td style="text-align: center;">60-64</td>
+<td><code>titleTextStyle: GoogleFonts.poppins(fontSize: 18, fontWeight: w600)</code></td>
+<td>AppBar title styling</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-header-component-design">1.3 Header Component Design</h2>
+<p><strong>Point:</strong> Header dengan logo circular dan branding text yang eye-catching.</p>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">229</td>
+<td><code>Row(children: [...])</code></td>
+<td>Layout horizontal logo + text</td>
+</tr>
+<tr>
+<td style="text-align: center;">231-235</td>
+<td><code>CircleAvatar(radius: 26, backgroundColor: Colors.white)</code></td>
+<td>Logo dalam lingkaran putih</td>
+</tr>
+<tr>
+<td style="text-align: center;">234</td>
+<td><code>Icon(Icons.spa, color: cs.primary)</code></td>
+<td>Icon spa (daun) warna primary</td>
+</tr>
+<tr>
+<td style="text-align: center;">240-246</td>
+<td><code>Text("Aromind AI", fontSize: 24, fontWeight: bold)</code></td>
+<td>Judul app bold 24px</td>
+</tr>
+<tr>
+<td style="text-align: center;">248-251</td>
+<td><code>Text("Cari parfum sesuai vibe kamu")</code></td>
+<td>Tagline dengan warna grey</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-form-ui-components">1.4 Form UI Components</h2>
+<p><strong>Point:</strong> Form card dengan dropdown, input budget, dan button yang user-friendly.</p>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">259-261</td>
+<td><code>Card(elevation: 6, borderRadius: 26)</code></td>
+<td>Form wrapper dengan shadow</td>
+</tr>
+<tr>
+<td style="text-align: center;">268-284</td>
+<td><code>DropdownButtonFormField(value: activity, items: [kerja, kuliah, date, hangout])</code></td>
+<td>Dropdown aktivitas</td>
+</tr>
+<tr>
+<td style="text-align: center;">286-299</td>
+<td><code>DropdownButtonFormField(value: weather, items: [panas, hujan, mendung, malam])</code></td>
+<td>Dropdown cuaca</td>
+</tr>
+<tr>
+<td style="text-align: center;">301-314</td>
+<td><code>DropdownButtonFormField(value: preference, items: [fresh, woody, sweet, oriental])</code></td>
+<td>Dropdown preferensi</td>
+</tr>
+<tr>
+<td style="text-align: center;">316-348</td>
+<td><code>Row(children: [Expanded(TextFormField budgetMin), Expanded(TextFormField budgetMax)])</code></td>
+<td>Input budget 2 kolom</td>
+</tr>
+<tr>
+<td style="text-align: center;">326-329</td>
+<td><code>inputFormatters: [FilteringTextInputFormatter.digitsOnly, ThousandsFormatter()]</code></td>
+<td>Format Rupiah otomatis</td>
+</tr>
+<tr>
+<td style="text-align: center;">350-356</td>
+<td><code>ElevatedButton(child: Text('Cari parfum terbaik'))</code></td>
+<td>Button submit primary</td>
+</tr>
+<tr>
+<td style="text-align: center;">358-365</td>
+<td><code>OutlinedButton.icon(icon: Icons.camera_alt_outlined, label: 'Scan dari foto parfum')</code></td>
+<td>Button scan dengan icon</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="15-result-card-design">1.5 Result Card Design</h2>
+<p><strong>Point:</strong> Card result dengan vibe badge berwarna dan informasi harga yang jelas.</p>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">401-418</td>
+<td><code>Container(padding, decoration: BoxDecoration(color: vibeColor.withOpacity(0.15)))</code></td>
+<td>Badge vibe dengan warna transparan</td>
+</tr>
+<tr>
+<td style="text-align: center;">410-416</td>
+<td><code>Text(vibe, style: TextStyle(color: vibeColor, fontWeight: w600))</code></td>
+<td>Label vibe dengan font bold</td>
+</tr>
+<tr>
+<td style="text-align: center;">419-429</td>
+<td><code>ListTile(title: p.perfume, subtitle: p.brand, trailing: Text("Rp ..."))</code></td>
+<td>Info parfum dalam ListTile</td>
+</tr>
+<tr>
+<td style="text-align: center;">213-226</td>
+<td><code>switch(vibe) { Fresh: Color(0xFF00BFA6), Sweet: Colors.pinkAccent, Woody: Colors.brown, Floral: Colors.purple }</code></td>
+<td>Color mapping per vibe</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-detail-page-design">1.6 Detail Page Design</h2>
+<p><strong>Point:</strong> Halaman detail dengan badge harga, gender, notes tiers, dan marketplace links.</p>
+<p><strong>File:</strong> <code>lib/perfume_detail_page.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">251-268</td>
+<td><code>Container(padding, decoration: BoxDecoration(borderRadius: 20))</code></td>
+<td>Badge harga rounded</td>
+</tr>
+<tr>
+<td style="text-align: center;">261-267</td>
+<td><code>Text('Rp ${idFormat.format(perfume.price)}', fontWeight: bold)</code></td>
+<td>Harga format Indonesia</td>
+</tr>
+<tr>
+<td style="text-align: center;">270-287</td>
+<td><code>Container(child: Text(detectedGender))</code></td>
+<td>Badge gender detection</td>
+</tr>
+<tr>
+<td style="text-align: center;">299-306</td>
+<td><code>Text('Vibes &amp; Notes', fontWeight: w600)</code></td>
+<td>Section title vibes</td>
+</tr>
+<tr>
+<td style="text-align: center;">310-330</td>
+<td><code>Text('Top notes: ...'), Text('Middle notes: ...'), Text('Base notes: ...')</code></td>
+<td>Tampilan note tiers</td>
+</tr>
+<tr>
+<td style="text-align: center;">335-359</td>
+<td><code>Wrap(children: [_marketplaceButton('Shopee'), _marketplaceButton('Tokopedia'), _marketplaceButton('TikTok Shop')])</code></td>
+<td>Marketplace buttons</td>
+</tr>
+<tr>
+<td style="text-align: center;">29-43</td>
+<td><code>ElevatedButton.icon(icon: Icons.shopping_bag_outlined, label: Text(label))</code></td>
+<td>Button marketplace dengan icon</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="2-backend-developer-integration">🔧 2. Backend Developer &amp; Integration</h1>
+<h2 id="21-http-client-setup">2.1 HTTP Client Setup</h2>
+<p><strong>Point:</strong> Setup HTTP client untuk komunikasi dengan backend Railway.</p>
+<p><strong>File:</strong> <code>lib/aromind_api.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td><code>import 'dart:convert';</code></td>
+<td>Library untuk JSON encode/decode</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td><code>import 'dart:typed_data';</code></td>
+<td>Library untuk binary data (gambar)</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td><code>import 'package:http/http.dart' as http;</code></td>
+<td>HTTP client library</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td><code>final _client = http.Client();</code></td>
+<td>Instance HTTP client reusable</td>
+</tr>
+<tr>
+<td style="text-align: center;">13</td>
+<td><code>final String baseUrl = 'https://aromindbackend-production.up.railway.app';</code></td>
+<td>Base URL backend production</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="22-recommendation-api-endpoint">2.2 Recommendation API Endpoint</h2>
+<p><strong>Point:</strong> Endpoint <code>/recommend</code> dengan method POST untuk mendapatkan rekomendasi parfum.</p>
+<p><strong>File:</strong> <code>lib/aromind_api.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">15-22</td>
+<td><code>Future&lt;List&lt;Perfume&gt;&gt; getRecommendations({...})</code></td>
+<td>Method return List Perfume</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td><code>int age = 25</code></td>
+<td>Parameter usia dengan default 25</td>
+</tr>
+<tr>
+<td style="text-align: center;">17-21</td>
+<td><code>required String activity, weather, preference, required double budgetMin, budgetMax</code></td>
+<td>5 parameter wajib</td>
+</tr>
+<tr>
+<td style="text-align: center;">23</td>
+<td><code>Uri.parse('$baseUrl/recommend')</code></td>
+<td>Endpoint: <code>/recommend</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">24-35</td>
+<td><code>_client.post(uri, headers: {...}, body: jsonEncode({...}))</code></td>
+<td>POST request dengan JSON</td>
+</tr>
+<tr>
+<td style="text-align: center;">26</td>
+<td><code>'Content-Type': 'application/json'</code></td>
+<td>Header content type</td>
+</tr>
+<tr>
+<td style="text-align: center;">28-33</td>
+<td><code>'age', 'activity', 'weather', 'budget_min', 'budget_max', 'preference'</code></td>
+<td>6 field dalam request body</td>
+</tr>
+<tr>
+<td style="text-align: center;">36-40</td>
+<td><code>if (resp.statusCode != 200) throw Exception(...)</code></td>
+<td>Error handling non-200</td>
+</tr>
+<tr>
+<td style="text-align: center;">41</td>
+<td><code>jsonDecode(resp.body)</code></td>
+<td>Parse JSON response</td>
+</tr>
+<tr>
+<td style="text-align: center;">42-44</td>
+<td><code>data['recommendations'] as List</code></td>
+<td>Ambil array recommendations</td>
+</tr>
+<tr>
+<td style="text-align: center;">45-47</td>
+<td><code>items.map((e) =&gt; Perfume.fromJson(e)).toList()</code></td>
+<td>Convert ke List<Perfume></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="23-ocr-recognition-api-endpoint">2.3 OCR Recognition API Endpoint</h2>
+<p><strong>Point:</strong> Endpoint <code>/recognize</code> untuk scan gambar parfum menggunakan Gemini OCR.</p>
+<p><strong>File:</strong> <code>lib/aromind_api.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">50-53</td>
+<td><code>Future&lt;Perfume?&gt; recognizePerfumeFromBytes(Uint8List bytes, {String filename})</code></td>
+<td>Method untuk upload gambar</td>
+</tr>
+<tr>
+<td style="text-align: center;">51</td>
+<td><code>Uint8List bytes</code></td>
+<td>Parameter binary image</td>
+</tr>
+<tr>
+<td style="text-align: center;">54</td>
+<td><code>Uri.parse('$baseUrl/recognize')</code></td>
+<td>Endpoint: <code>/recognize</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">55</td>
+<td><code>http.MultipartRequest('POST', uri)</code></td>
+<td>Multipart request untuk file upload</td>
+</tr>
+<tr>
+<td style="text-align: center;">56-58</td>
+<td><code>req.files.add(MultipartFile.fromBytes('file', bytes, filename: filename))</code></td>
+<td>Attach file dengan key 'file'</td>
+</tr>
+<tr>
+<td style="text-align: center;">59</td>
+<td><code>await req.send()</code></td>
+<td>Kirim request</td>
+</tr>
+<tr>
+<td style="text-align: center;">60</td>
+<td><code>http.Response.fromStream(streamed)</code></td>
+<td>Convert stream ke Response</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td><code>jsonDecode(resp.body)</code></td>
+<td>Parse JSON response</td>
+</tr>
+<tr>
+<td style="text-align: center;">65-67</td>
+<td><code>if (data['matched'] != null) return Perfume.fromJson(data['matched'])</code></td>
+<td>Return parfum yang match</td>
+</tr>
+<tr>
+<td style="text-align: center;">68</td>
+<td><code>return null</code></td>
+<td>Return null jika tidak match</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="24-image-picker-integration">2.4 Image Picker Integration</h2>
+<p><strong>Point:</strong> Integrasi dengan image_picker untuk mengambil gambar dari gallery.</p>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">5</td>
+<td><code>import 'package:image_picker/image_picker.dart';</code></td>
+<td>Import image picker</td>
+</tr>
+<tr>
+<td style="text-align: center;">110</td>
+<td><code>final ImagePicker _picker = ImagePicker();</code></td>
+<td>Instance image picker</td>
+</tr>
+<tr>
+<td style="text-align: center;">167</td>
+<td><code>Future&lt;void&gt; _pickAndRecognize() async</code></td>
+<td>Method pick &amp; recognize</td>
+</tr>
+<tr>
+<td style="text-align: center;">169-173</td>
+<td><code>_picker.pickImage(source: ImageSource.gallery, maxWidth: 1200, imageQuality: 80)</code></td>
+<td>Pick dari gallery, resize max 1200px</td>
+</tr>
+<tr>
+<td style="text-align: center;">177</td>
+<td><code>await picked.readAsBytes()</code></td>
+<td>Baca gambar sebagai bytes</td>
+</tr>
+<tr>
+<td style="text-align: center;">178-181</td>
+<td><code>api.recognizePerfumeFromBytes(bytes, filename: picked.name)</code></td>
+<td>Kirim ke API recognize</td>
+</tr>
+<tr>
+<td style="text-align: center;">192-195</td>
+<td><code>Navigator.push(..., PerfumeDetailPage(perfume: result))</code></td>
+<td>Navigate ke detail jika match</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="25-data-model-parsing-robust">2.5 Data Model Parsing (Robust)</h2>
+<p><strong>Point:</strong> Parsing JSON dengan banyak fallback untuk handle berbagai format response.</p>
+<p><strong>File:</strong> <code>lib/perfume.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">58</td>
+<td><code>factory Perfume.fromJson(Map&lt;String, dynamic&gt; json)</code></td>
+<td>Factory constructor</td>
+</tr>
+<tr>
+<td style="text-align: center;">59</td>
+<td><code>String getString(dynamic v) =&gt; v == null ? '' : v.toString()</code></td>
+<td>Helper: apapun → String</td>
+</tr>
+<tr>
+<td style="text-align: center;">61-67</td>
+<td><code>double? parsePrice(dynamic v) {...}</code></td>
+<td>Helper: parse harga (hapus Rp, titik)</td>
+</tr>
+<tr>
+<td style="text-align: center;">72-73</td>
+<td><code>if (json['marketplace'] is Map) mp = Map.from(json['marketplace'])</code></td>
+<td>Parse marketplace Map</td>
+</tr>
+<tr>
+<td style="text-align: center;">74-75</td>
+<td><code>else if (json['links'] is Map) mp = Map.from(json['links'])</code></td>
+<td>Fallback ke 'links'</td>
+</tr>
+<tr>
+<td style="text-align: center;">76-78</td>
+<td><code>else if (json['marketplace'] is String) mp = {'shop': json['marketplace']}</code></td>
+<td>Handle string URL</td>
+</tr>
+<tr>
+<td style="text-align: center;">79-89</td>
+<td><code>else if (json['marketplace'] is List) {...}</code></td>
+<td>Handle array of objects</td>
+</tr>
+<tr>
+<td style="text-align: center;">96-101</td>
+<td><code>json['image_url'] ?? json['image'] ?? json['imageUrl']</code></td>
+<td>Image URL dengan fallback</td>
+</tr>
+<tr>
+<td style="text-align: center;">111-118</td>
+<td><code>json['buy_url'] ?? json['buyUrl'] ?? json['url'] ?? json['link']</code></td>
+<td>Buy URL dengan fallback</td>
+</tr>
+<tr>
+<td style="text-align: center;">145</td>
+<td><code>json['perfume'] ?? json['name'] ?? ''</code></td>
+<td>Nama dengan fallback 'name'</td>
+</tr>
+<tr>
+<td style="text-align: center;">147</td>
+<td><code>json['price'] ?? json['harga'] ?? json['price_rp']</code></td>
+<td>Harga dengan fallback lokal</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="26-resource-cleanup">2.6 Resource Cleanup</h2>
+<p><strong>Point:</strong> Proper cleanup untuk HTTP client saat tidak dipakai.</p>
+<p><strong>File:</strong> <code>lib/aromind_api.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">71-75</td>
+<td><code>void dispose() { try { _client.close(); } catch (_) {} }</code></td>
+<td>Method dispose dengan try-catch</td>
+</tr>
+</tbody>
+</table>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">114-121</td>
+<td><code>void dispose() { budgetMinController.dispose(); budgetMaxController.dispose(); api.dispose(); super.dispose(); }</code></td>
+<td>Dispose controllers dan API</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="3-pm-system-architect">📋 3. PM &amp; System Architect</h1>
+<h2 id="31-project-file-structure">3.1 Project File Structure</h2>
+<p><strong>Point:</strong> Arsitektur dengan separation of concerns yang jelas.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th style="text-align: center;">Lines</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lib/main.dart</code></td>
+<td style="text-align: center;">480</td>
+<td>Entry point, Home page UI, State management</td>
+</tr>
+<tr>
+<td><code>lib/aromind_api.dart</code></td>
+<td style="text-align: center;">77</td>
+<td>API client, HTTP requests, Response handling</td>
+</tr>
+<tr>
+<td><code>lib/perfume.dart</code></td>
+<td style="text-align: center;">314</td>
+<td>Data model, JSON parsing, ML logic (gender, notes)</td>
+</tr>
+<tr>
+<td><code>lib/perfume_detail_page.dart</code></td>
+<td style="text-align: center;">413</td>
+<td>Detail page UI, Marketplace links, Similar perfumes</td>
+</tr>
+<tr>
+<td><code>lib/utils.dart</code></td>
+<td style="text-align: center;">37</td>
+<td>Utility functions (Jaccard similarity)</td>
+</tr>
+<tr>
+<td><code>lib/app_theme.dart</code></td>
+<td style="text-align: center;">91</td>
+<td>Theme configuration, Material 3, Typography</td>
+</tr>
+<tr>
+<td><code>lib/colors.dart</code></td>
+<td style="text-align: center;">22</td>
+<td>Color palette constants</td>
+</tr>
+<tr>
+<td><code>web/index.html</code></td>
+<td style="text-align: center;">39</td>
+<td>Web app entry point, PWA config</td>
+</tr>
+<tr>
+<td><code>pubspec.yaml</code></td>
+<td style="text-align: center;">~50</td>
+<td>Dependencies, assets, metadata</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="32-technology-stack">3.2 Technology Stack</h2>
+<p><strong>Point:</strong> Pemilihan teknologi modern yang sesuai kebutuhan.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>File Bukti</th>
+<th style="text-align: center;">Baris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend Framework</td>
+<td>Flutter</td>
+<td><code>pubspec.yaml</code></td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td>Design System</td>
+<td>Material Design 3</td>
+<td><code>app_theme.dart</code></td>
+<td style="text-align: center;">18</td>
+</tr>
+<tr>
+<td>Typography</td>
+<td>Google Fonts (Poppins)</td>
+<td><code>app_theme.dart</code></td>
+<td style="text-align: center;">21</td>
+</tr>
+<tr>
+<td>HTTP Client</td>
+<td>http package</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td>Image Picker</td>
+<td>image_picker</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td>URL Launcher</td>
+<td>url_launcher</td>
+<td><code>perfume_detail_page.dart</code></td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td>Internationalization</td>
+<td>intl</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>FastAPI (Python)</td>
+<td>External</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td>Hosting</td>
+<td>Railway</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">13</td>
+</tr>
+<tr>
+<td>OCR</td>
+<td>Gemini Vision API</td>
+<td>Backend</td>
+<td style="text-align: center;">-</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="33-api-contract">3.3 API Contract</h2>
+<p><strong>Point:</strong> Definisi contract antara frontend dan backend.</p>
+<h3 id="endpoint-post-recommend">Endpoint: POST /recommend</h3>
+<table>
+<thead>
+<tr>
+<th>Request Field</th>
+<th>Type</th>
+<th style="text-align: center;">Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>age</code></td>
+<td>int</td>
+<td style="text-align: center;">No (default 25)</td>
+<td>Usia user</td>
+</tr>
+<tr>
+<td><code>activity</code></td>
+<td>string</td>
+<td style="text-align: center;">Yes</td>
+<td>kerja/kuliah/date/hangout</td>
+</tr>
+<tr>
+<td><code>weather</code></td>
+<td>string</td>
+<td style="text-align: center;">Yes</td>
+<td>panas/hujan/mendung/malam</td>
+</tr>
+<tr>
+<td><code>budget_min</code></td>
+<td>float</td>
+<td style="text-align: center;">Yes</td>
+<td>Budget minimum (Rp)</td>
+</tr>
+<tr>
+<td><code>budget_max</code></td>
+<td>float</td>
+<td style="text-align: center;">Yes</td>
+<td>Budget maximum (Rp)</td>
+</tr>
+<tr>
+<td><code>preference</code></td>
+<td>string</td>
+<td style="text-align: center;">Yes</td>
+<td>fresh/woody/sweet/oriental</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Response Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>recommendations</code></td>
+<td>array</td>
+<td>List of Perfume objects</td>
+</tr>
+<tr>
+<td><code>recommendations[].perfume</code></td>
+<td>string</td>
+<td>Nama parfum</td>
+</tr>
+<tr>
+<td><code>recommendations[].brand</code></td>
+<td>string</td>
+<td>Brand</td>
+</tr>
+<tr>
+<td><code>recommendations[].price</code></td>
+<td>float</td>
+<td>Harga</td>
+</tr>
+<tr>
+<td><code>recommendations[].score</code></td>
+<td>float</td>
+<td>Recommendation score (0-1)</td>
+</tr>
+<tr>
+<td><code>recommendations[].notes</code></td>
+<td>string</td>
+<td>Deskripsi aroma</td>
+</tr>
+<tr>
+<td><code>recommendations[].marketplace</code></td>
+<td>object</td>
+<td>Links ke marketplace</td>
+</tr>
+</tbody>
+</table>
+<h3 id="endpoint-post-recognize">Endpoint: POST /recognize</h3>
+<table>
+<thead>
+<tr>
+<th>Request</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>file</code></td>
+<td>binary</td>
+<td>Image file (multipart)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Response Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matched</code></td>
+<td>object/null</td>
+<td>Perfume object jika match</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="34-data-flow-architecture">3.4 Data Flow Architecture</h2>
+<p><strong>Point:</strong> Alur data dari input user sampai tampilan hasil.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Step</th>
+<th>Component</th>
+<th>File</th>
+<th style="text-align: center;">Baris</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td>User input form</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">268-348</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>Validate &amp; parse</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">124, 134-143</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td>Call API</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">145-151</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>HTTP POST</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">24-35</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td>Backend process</td>
+<td>External</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td>Parse response</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">41-47</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td>Convert to model</td>
+<td><code>perfume.dart</code></td>
+<td style="text-align: center;">58-159</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>Update state</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">153-159</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td>Render results</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">394-442</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="35-feature-scope">3.5 Feature Scope</h2>
+<p><strong>Point:</strong> Daftar fitur yang sudah diimplementasi.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th style="text-align: center;">Status</th>
+<th>Main File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input aktivitas, cuaca, preferensi</td>
+<td style="text-align: center;">✅</td>
+<td><code>main.dart</code></td>
+</tr>
+<tr>
+<td>Input budget range dengan format Rp</td>
+<td style="text-align: center;">✅</td>
+<td><code>main.dart</code></td>
+</tr>
+<tr>
+<td>Get recommendations dari API</td>
+<td style="text-align: center;">✅</td>
+<td><code>aromind_api.dart</code></td>
+</tr>
+<tr>
+<td>OCR scan parfum dari foto</td>
+<td style="text-align: center;">✅</td>
+<td><code>aromind_api.dart</code></td>
+</tr>
+<tr>
+<td>Detail page dengan notes</td>
+<td style="text-align: center;">✅</td>
+<td><code>perfume_detail_page.dart</code></td>
+</tr>
+<tr>
+<td>Marketplace links (Shopee, Tokopedia, TikTok)</td>
+<td style="text-align: center;">✅</td>
+<td><code>perfume_detail_page.dart</code></td>
+</tr>
+<tr>
+<td>Similar perfumes suggestion</td>
+<td style="text-align: center;">✅</td>
+<td><code>utils.dart</code></td>
+</tr>
+<tr>
+<td>Dark/Light mode toggle</td>
+<td style="text-align: center;">✅</td>
+<td><code>main.dart</code></td>
+</tr>
+<tr>
+<td>Responsive web layout</td>
+<td style="text-align: center;">✅</td>
+<td><code>web/index.html</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="4-ml-engineering">🤖 4. ML Engineering</h1>
+<h2 id="41-recommendation-scoring-system">4.1 Recommendation Scoring System</h2>
+<p><strong>Point:</strong> Score parfum dihitung di backend berdasarkan multi-factor matching.</p>
+<h3 id="input-parameters">Input Parameters</h3>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Digunakan untuk...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">101</td>
+<td><code>String activity = 'kerja';</code></td>
+<td>Activity matching score</td>
+</tr>
+<tr>
+<td style="text-align: center;">102</td>
+<td><code>String weather = 'panas';</code></td>
+<td>Weather adaptation score</td>
+</tr>
+<tr>
+<td style="text-align: center;">103</td>
+<td><code>String preference = 'fresh';</code></td>
+<td>Preference matching score (highest weight)</td>
+</tr>
+<tr>
+<td style="text-align: center;">134-143</td>
+<td><code>double.tryParse(budgetController.text.replaceAll(...))</code></td>
+<td>Budget filtering (eliminasi)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api-call">API Call</h3>
+<p><strong>File:</strong> <code>lib/aromind_api.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Parameter untuk scoring</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">28</td>
+<td><code>'age': age</code></td>
+<td>Usia user</td>
+</tr>
+<tr>
+<td style="text-align: center;">29</td>
+<td><code>'activity': activity</code></td>
+<td>Aktivitas user</td>
+</tr>
+<tr>
+<td style="text-align: center;">30</td>
+<td><code>'weather': weather</code></td>
+<td>Kondisi cuaca</td>
+</tr>
+<tr>
+<td style="text-align: center;">31-32</td>
+<td><code>'budget_min': budgetMin, 'budget_max': budgetMax</code></td>
+<td>Range budget</td>
+</tr>
+<tr>
+<td style="text-align: center;">33</td>
+<td><code>'preference': preference</code></td>
+<td>Preferensi aroma</td>
+</tr>
+</tbody>
+</table>
+<h3 id="score-parsing">Score Parsing</h3>
+<p><strong>File:</strong> <code>lib/perfume.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Bukti score berasal dari...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">8</td>
+<td><code>final double score;</code></td>
+<td>Field score dalam model</td>
+</tr>
+<tr>
+<td style="text-align: center;">29</td>
+<td><code>required this.score</code></td>
+<td>Score required di constructor</td>
+</tr>
+<tr>
+<td style="text-align: center;">134</td>
+<td><code>double scoreVal = 0.0;</code></td>
+<td>Default value score</td>
+</tr>
+<tr>
+<td style="text-align: center;">136-137</td>
+<td><code>if (json['score'] is num) scoreVal = (json['score'] as num).toDouble();</code></td>
+<td>Parse dari response</td>
+</tr>
+<tr>
+<td style="text-align: center;">139</td>
+<td><code>scoreVal = double.tryParse(getString(json['score'])) ?? 0.0;</code></td>
+<td>Fallback parse string</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scoring-formula-backend">Scoring Formula (Backend)</h3>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th style="text-align: center;">Weight</th>
+<th>Matching Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Budget</td>
+<td style="text-align: center;">Filter</td>
+<td>Di luar range → eliminasi</td>
+</tr>
+<tr>
+<td>Activity</td>
+<td style="text-align: center;">20%</td>
+<td>Keyword match (kerja→fresh, date→sweet)</td>
+</tr>
+<tr>
+<td>Weather</td>
+<td style="text-align: center;">30%</td>
+<td>Keyword match (panas→citrus, malam→woody)</td>
+</tr>
+<tr>
+<td>Preference</td>
+<td style="text-align: center;">50%</td>
+<td>Keyword match (fresh→citrus/green, woody→cedar)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="42-vibe-detection-algorithm">4.2 Vibe Detection Algorithm</h2>
+<p><strong>Point:</strong> Klasifikasi aroma ke kategori visual berdasarkan keyword matching.</p>
+<p><strong>File:</strong> <code>lib/main.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">204</td>
+<td><code>String _detectVibe(String notes)</code></td>
+<td>Method untuk deteksi vibe</td>
+</tr>
+<tr>
+<td style="text-align: center;">205</td>
+<td><code>final n = notes.toLowerCase();</code></td>
+<td>Normalisasi lowercase</td>
+</tr>
+<tr>
+<td style="text-align: center;">206</td>
+<td><code>if (n.contains("citrus") \|\| n.contains("lemon")) return "Fresh";</code></td>
+<td>citrus/lemon → Fresh</td>
+</tr>
+<tr>
+<td style="text-align: center;">207</td>
+<td><code>if (n.contains("vanilla") \|\| n.contains("sweet")) return "Sweet";</code></td>
+<td>vanilla/sweet → Sweet</td>
+</tr>
+<tr>
+<td style="text-align: center;">208</td>
+<td><code>if (n.contains("wood") \|\| n.contains("cedar")) return "Woody";</code></td>
+<td>wood/cedar → Woody</td>
+</tr>
+<tr>
+<td style="text-align: center;">209</td>
+<td><code>if (n.contains("rose") \|\| n.contains("jasmine")) return "Floral";</code></td>
+<td>rose/jasmine → Floral</td>
+</tr>
+<tr>
+<td style="text-align: center;">210</td>
+<td><code>return "All-rounder";</code></td>
+<td>Default jika tidak match</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="43-gender-detection-algorithm">4.3 Gender Detection Algorithm</h2>
+<p><strong>Point:</strong> Weighted keyword scoring untuk menentukan target gender parfum.</p>
+<p><strong>File:</strong> <code>lib/perfume.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">214</td>
+<td><code>String get detectedGender</code></td>
+<td>Getter property</td>
+</tr>
+<tr>
+<td style="text-align: center;">215</td>
+<td><code>final n = (notes ?? '').toLowerCase();</code></td>
+<td>Normalisasi notes</td>
+</tr>
+<tr>
+<td style="text-align: center;">218-219</td>
+<td><code>int maleScore = 0; int femaleScore = 0;</code></td>
+<td>Initialize scores</td>
+</tr>
+<tr>
+<td style="text-align: center;">221-232</td>
+<td><code>maleKeys = ['musk', 'amber', 'woody', 'cedar', 'vetiver', 'tobacco', 'leather', 'oakmoss', 'spice', 'smok']</code></td>
+<td>10 keywords maskulin</td>
+</tr>
+<tr>
+<td style="text-align: center;">233-246</td>
+<td><code>femaleKeys = ['rose', 'jasmine', 'vanilla', 'ylang', 'lily', 'powder', 'peony', 'fruit', 'floral', 'iris', 'berry', 'coconut']</code></td>
+<td>12 keywords feminin</td>
+</tr>
+<tr>
+<td style="text-align: center;">248</td>
+<td><code>for (k in maleKeys) if (n.contains(k)) maleScore += 2;</code></td>
+<td>+2 per male keyword</td>
+</tr>
+<tr>
+<td style="text-align: center;">249</td>
+<td><code>for (k in femaleKeys) if (n.contains(k)) femaleScore += 2;</code></td>
+<td>+2 per female keyword</td>
+</tr>
+<tr>
+<td style="text-align: center;">251-259</td>
+<td><code>neutral = ['citrus', 'fresh', 'aquatic', 'green', 'herbal', 'spicy', 'ambergris']</code></td>
+<td>7 keywords netral</td>
+</tr>
+<tr>
+<td style="text-align: center;">260-264</td>
+<td><code>for (k in neutral) { maleScore += 1; femaleScore += 1; }</code></td>
+<td>+1 ke kedua sisi</td>
+</tr>
+<tr>
+<td style="text-align: center;">266</td>
+<td><code>if (maleScore == 0 &amp;&amp; femaleScore == 0) return 'All / Unknown';</code></td>
+<td>Tidak ada match</td>
+</tr>
+<tr>
+<td style="text-align: center;">267</td>
+<td><code>if ((maleScore - femaleScore).abs() &lt;= 2) return 'Unisex';</code></td>
+<td>Selisih ≤ 2 → Unisex</td>
+</tr>
+<tr>
+<td style="text-align: center;">268</td>
+<td><code>return maleScore &gt; femaleScore ? 'Male' : 'Female';</code></td>
+<td>Return score tertinggi</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="44-jaccard-similarity-algorithm">4.4 Jaccard Similarity Algorithm</h2>
+<p><strong>Point:</strong> Menghitung kemiripan 2 parfum berdasarkan notes menggunakan Jaccard Index.</p>
+<p><strong>File:</strong> <code>lib/utils.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td><code>Set&lt;String&gt; _tokenize(String? s)</code></td>
+<td>Helper tokenize notes</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td><code>if (s == null \|\| s.isEmpty) return &lt;String&gt;{};</code></td>
+<td>Handle null/empty</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td><code>s.toLowerCase().replaceAll(RegExp(r'[^a-z0-9, ]'), ' ')</code></td>
+<td>Lowercase + hapus special chars</td>
+</tr>
+<tr>
+<td style="text-align: center;">7-11</td>
+<td><code>split(RegExp(r'[, ]+')).map(trim).where(isNotEmpty).toSet()</code></td>
+<td>Split → trim → filter → Set</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td><code>double similarityScore(Perfume a, Perfume b)</code></td>
+<td>Method hitung similarity</td>
+</tr>
+<tr>
+<td style="text-align: center;">17-18</td>
+<td><code>final sa = _tokenize(a.notes); final sb = _tokenize(b.notes);</code></td>
+<td>Tokenize kedua notes</td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td><code>final inter = sa.intersection(sb).length;</code></td>
+<td>Hitung intersection</td>
+</tr>
+<tr>
+<td style="text-align: center;">21</td>
+<td><code>final uni = sa.union(sb).length;</code></td>
+<td>Hitung union</td>
+</tr>
+<tr>
+<td style="text-align: center;">23</td>
+<td><code>return inter / uni;</code></td>
+<td><strong>Jaccard = |A∩B| / |A∪B|</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">26</td>
+<td><code>List&lt;Perfume&gt; findTopSimilar(Perfume target, List&lt;Perfume&gt; all, {int top = 3})</code></td>
+<td>Cari top-K similar</td>
+</tr>
+<tr>
+<td style="text-align: center;">33-34</td>
+<td><code>sorted.sort((a, b) =&gt; b.value.compareTo(a.value))</code></td>
+<td>Sort descending by score</td>
+</tr>
+<tr>
+<td style="text-align: center;">35</td>
+<td><code>return sorted.take(top).map((e) =&gt; e.key).toList()</code></td>
+<td>Return top-3</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="45-note-tier-extraction">4.5 Note Tier Extraction</h2>
+<p><strong>Point:</strong> Split notes menjadi Top, Middle, dan Base notes berdasarkan urutan.</p>
+<p><strong>File:</strong> <code>lib/perfume.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">285</td>
+<td><code>Map&lt;String, String&gt; extractNoteTiers()</code></td>
+<td>Method extract tiers</td>
+</tr>
+<tr>
+<td style="text-align: center;">286-291</td>
+<td><code>notes.toLowerCase().split(',').map(trim).where(isNotEmpty).toList()</code></td>
+<td>Split by comma</td>
+</tr>
+<tr>
+<td style="text-align: center;">292</td>
+<td><code>final top = parts.take(2).join(', ');</code></td>
+<td><strong>Top = 2 notes pertama</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">293</td>
+<td><code>final middle = parts.skip(2).take(3).join(', ')</code></td>
+<td><strong>Middle = 3 notes berikutnya</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">294-296</td>
+<td><code>final base = parts.skip(5).join(', ')</code></td>
+<td><strong>Base = sisanya</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">297</td>
+<td><code>return {'top': top, 'middle': middle, 'base': base};</code></td>
+<td>Return Map 3 keys</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="46-marketplace-url-lookup">4.6 Marketplace URL Lookup</h2>
+<p><strong>Point:</strong> Smart lookup URL marketplace dengan multiple fallback strategies.</p>
+<p><strong>File:</strong> <code>lib/perfume.dart</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Baris</th>
+<th>Kode</th>
+<th>Logic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">169</td>
+<td><code>String? marketplaceUrl(String key)</code></td>
+<td>Method cari URL</td>
+</tr>
+<tr>
+<td style="text-align: center;">171</td>
+<td><code>final lowerKey = key.toLowerCase();</code></td>
+<td>Normalize key</td>
+</tr>
+<tr>
+<td style="text-align: center;">174-178</td>
+<td><code>if (k.toLowerCase() == lowerKey) return marketplace[k]</code></td>
+<td>Strategy 1: Exact match</td>
+</tr>
+<tr>
+<td style="text-align: center;">181-184</td>
+<td><code>if (k.toLowerCase().contains(lowerKey)) return ...</code></td>
+<td>Strategy 2: Substring match</td>
+</tr>
+<tr>
+<td style="text-align: center;">187-190</td>
+<td><code>if (v.toLowerCase().contains(lowerKey)) return s;</code></td>
+<td>Strategy 3: Match di values</td>
+</tr>
+<tr>
+<td style="text-align: center;">193-200</td>
+<td><code>if (s.startsWith('http') \|\| s.contains('shopee') \|\| ...)</code></td>
+<td>Strategy 4: URL-like value</td>
+</tr>
+<tr>
+<td style="text-align: center;">204-207</td>
+<td><code>return marketplace.entries.first.value</code></td>
+<td>Strategy 5: First value fallback</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="summary-bukti-per-role">📊 Summary: Bukti Per Role</h1>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Fokus Utama</th>
+<th>File Utama</th>
+<th style="text-align: center;">Baris Kunci</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UI/UX</strong></td>
+<td>Color palette</td>
+<td><code>colors.dart</code></td>
+<td style="text-align: center;">6-20</td>
+</tr>
+<tr>
+<td><strong>UI/UX</strong></td>
+<td>Theme config</td>
+<td><code>app_theme.dart</code></td>
+<td style="text-align: center;">18, 21, 36-42</td>
+</tr>
+<tr>
+<td><strong>UI/UX</strong></td>
+<td>Form components</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">258-371</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>API client</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">10, 13</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>/recommend endpoint</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">23-47</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>/recognize endpoint</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">54-68</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>JSON parsing</td>
+<td><code>perfume.dart</code></td>
+<td style="text-align: center;">58-159</td>
+</tr>
+<tr>
+<td><strong>PM</strong></td>
+<td>File structure</td>
+<td>All files</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td><strong>PM</strong></td>
+<td>Tech stack</td>
+<td>Various</td>
+<td style="text-align: center;">-</td>
+</tr>
+<tr>
+<td><strong>PM</strong></td>
+<td>API contract</td>
+<td><code>aromind_api.dart</code></td>
+<td style="text-align: center;">15-22, 50-53</td>
+</tr>
+<tr>
+<td><strong>ML</strong></td>
+<td>Score field</td>
+<td><code>perfume.dart</code></td>
+<td style="text-align: center;">8, 133-142</td>
+</tr>
+<tr>
+<td><strong>ML</strong></td>
+<td>Vibe detection</td>
+<td><code>main.dart</code></td>
+<td style="text-align: center;">204-211</td>
+</tr>
+<tr>
+<td><strong>ML</strong></td>
+<td>Gender detection</td>
+<td><code>perfume.dart</code></td>
+<td style="text-align: center;">214-269</td>
+</tr>
+<tr>
+<td><strong>ML</strong></td>
+<td>Jaccard similarity</td>
+<td><code>utils.dart</code></td>
+<td style="text-align: center;">16-24</td>
+</tr>
+<tr>
+<td><strong>ML</strong></td>
+<td>Note tiers</td>
+<td><code>perfume.dart</code></td>
+<td style="text-align: center;">285-298</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

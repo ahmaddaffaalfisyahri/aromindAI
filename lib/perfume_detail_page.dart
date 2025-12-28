@@ -303,30 +303,99 @@ class PerfumeDetailPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Text(perfume.notes ?? '-', style: theme.textTheme.bodyMedium),
-            const SizedBox(height: 12),
+            Text(
+              (perfume.notes ?? '-')
+                  .replaceAll(RegExp(r'\s*-\s*-\s*'), ', ')
+                  .replaceAll(RegExp(r'\s*-\s*$'), '')
+                  .replaceAll(RegExp(r',\s*$'), '')
+                  .trim(),
+              style: theme.textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 16),
 
-            // NOTE TIERS
-            if ((tiers['top'] ?? '').isNotEmpty) ...[
-              Text(
-                'Top notes: ${tiers['top']}',
-                style: theme.textTheme.bodySmall,
-              ),
-              const SizedBox(height: 6),
-            ],
-            if ((tiers['middle'] ?? '').isNotEmpty) ...[
-              Text(
-                'Middle notes: ${tiers['middle']}',
-                style: theme.textTheme.bodySmall,
-              ),
-              const SizedBox(height: 6),
-            ],
-            if ((tiers['base'] ?? '').isNotEmpty) ...[
-              Text(
-                'Base notes: ${tiers['base']}',
-                style: theme.textTheme.bodySmall,
-              ),
-              const SizedBox(height: 6),
+            // NOTE TIERS - simple subtle styling
+            if ((tiers['top'] ?? '').isNotEmpty ||
+                (tiers['middle'] ?? '').isNotEmpty ||
+                (tiers['base'] ?? '').isNotEmpty) ...[
+              const SizedBox(height: 4),
+              // Top Notes
+              if ((tiers['top'] ?? '').isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 85,
+                        child: Text(
+                          'Top notes:',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.textTheme.bodySmall?.color
+                                ?.withOpacity(0.6),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          tiers['top']!,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              // Middle Notes
+              if ((tiers['middle'] ?? '').isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 85,
+                        child: Text(
+                          'Middle notes:',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.textTheme.bodySmall?.color
+                                ?.withOpacity(0.6),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          tiers['middle']!,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              // Base Notes
+              if ((tiers['base'] ?? '').isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 85,
+                        child: Text(
+                          'Base notes:',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.textTheme.bodySmall?.color
+                                ?.withOpacity(0.6),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          tiers['base']!,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             ],
 
             const SizedBox(height: 18),
@@ -404,6 +473,19 @@ class PerfumeDetailPage extends StatelessWidget {
                 }).toList(),
               ),
             ],
+
+            // BRANDING
+            const SizedBox(height: 40),
+            Center(
+              child: Text(
+                'Aromind AI',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.textTheme.bodySmall?.color?.withOpacity(0.3),
+                  letterSpacing: 1.5,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

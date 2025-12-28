@@ -98,9 +98,9 @@ class _AromindHomePageState extends State<AromindHomePage> {
   final budgetMinController = TextEditingController();
   final budgetMaxController = TextEditingController();
 
-  String activity = 'kerja';
-  String weather = 'panas';
-  String preference = 'fresh';
+  String? activity;
+  String? weather;
+  String? preference;
 
   bool loading = false;
   String? errorMessage;
@@ -109,11 +109,13 @@ class _AromindHomePageState extends State<AromindHomePage> {
   final AromindApi api = AromindApi();
   final ImagePicker _picker = ImagePicker();
   final NumberFormat _idFormat = NumberFormat.decimalPattern('id_ID');
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void dispose() {
     budgetMinController.dispose();
     budgetMaxController.dispose();
+    _scrollController.dispose();
     try {
       api.dispose();
     } catch (_) {}
@@ -143,11 +145,11 @@ class _AromindHomePageState extends State<AromindHomePage> {
           0;
 
       final recs = await api.getRecommendations(
-        activity: activity,
-        weather: weather,
+        activity: activity ?? 'kerja',
+        weather: weather ?? 'panas',
         budgetMin: min,
         budgetMax: max,
-        preference: preference,
+        preference: preference ?? 'fresh',
       );
 
       setState(() {
@@ -161,6 +163,16 @@ class _AromindHomePageState extends State<AromindHomePage> {
       setState(() => errorMessage = 'Terjadi kesalahan: $e');
     } finally {
       setState(() => loading = false);
+      // Scroll ke hasil pertama setelah loading selesai
+      if (results.isNotEmpty) {
+        await Future.delayed(const Duration(milliseconds: 100));
+        // Scroll ke posisi awal hasil (setelah form card)
+        _scrollController.animateTo(
+          450, // Posisi kira-kira setelah form card
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeOut,
+        );
+      }
     }
   }
 
@@ -267,9 +279,11 @@ class _AromindHomePageState extends State<AromindHomePage> {
             children: [
               DropdownButtonFormField<String>(
                 value: activity,
-                decoration: const InputDecoration(
-                  labelText: "Aktivitas",
-                  prefixIcon: Icon(Icons.event),
+                decoration: InputDecoration(
+                  labelText: activity == null ? null : "Aktivitas",
+                  hintText: "Aktivitas",
+                  prefixIcon: const Icon(Icons.event),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
                 items: const [
                   DropdownMenuItem(
@@ -280,14 +294,16 @@ class _AromindHomePageState extends State<AromindHomePage> {
                   DropdownMenuItem(value: "date", child: Text("Date")),
                   DropdownMenuItem(value: "hangout", child: Text("Hangout")),
                 ],
-                onChanged: (v) => setState(() => activity = v ?? 'kerja'),
+                onChanged: (v) => setState(() => activity = v),
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 value: weather,
-                decoration: const InputDecoration(
-                  labelText: "Cuaca",
-                  prefixIcon: Icon(Icons.wb_sunny),
+                decoration: InputDecoration(
+                  labelText: weather == null ? null : "Cuaca",
+                  hintText: "Cuaca",
+                  prefixIcon: const Icon(Icons.wb_sunny),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
                 items: const [
                   DropdownMenuItem(value: "panas", child: Text("Panas")),
@@ -295,14 +311,16 @@ class _AromindHomePageState extends State<AromindHomePage> {
                   DropdownMenuItem(value: "mendung", child: Text("Mendung")),
                   DropdownMenuItem(value: "malam", child: Text("Malam")),
                 ],
-                onChanged: (v) => setState(() => weather = v ?? 'panas'),
+                onChanged: (v) => setState(() => weather = v),
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 value: preference,
-                decoration: const InputDecoration(
-                  labelText: "Preferensi Aroma",
-                  prefixIcon: Icon(Icons.favorite),
+                decoration: InputDecoration(
+                  labelText: preference == null ? null : "Preferensi Aroma",
+                  hintText: "Preferensi Aroma",
+                  prefixIcon: const Icon(Icons.favorite),
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                 ),
                 items: const [
                   DropdownMenuItem(value: "fresh", child: Text("Fresh")),
@@ -310,7 +328,7 @@ class _AromindHomePageState extends State<AromindHomePage> {
                   DropdownMenuItem(value: "sweet", child: Text("Sweet")),
                   DropdownMenuItem(value: "oriental", child: Text("Oriental")),
                 ],
-                onChanged: (v) => setState(() => preference = v ?? 'fresh'),
+                onChanged: (v) => setState(() => preference = v),
               ),
               const SizedBox(height: 12),
               Row(
@@ -351,7 +369,19 @@ class _AromindHomePageState extends State<AromindHomePage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: loading ? null : _submit,
-                  child: Text(loading ? 'Mencari...' : 'Cari parfum terbaik'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: cs.primary,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(color: cs.primary, width: 2),
+                    ),
+                  ),
+                  child: Text(
+                    loading ? 'Mencari...' : 'Cari parfum terbaik',
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
@@ -370,75 +400,52 @@ class _AromindHomePageState extends State<AromindHomePage> {
     );
   }
 
-  Widget _buildResultArea(ColorScheme cs) {
-    if (errorMessage != null) {
-      return Expanded(
-        child: Center(
-          child: Text(errorMessage!, style: const TextStyle(color: Colors.red)),
-        ),
-      );
-    }
+  Widget _buildResultList(ColorScheme cs) {
+    return Column(
+      children: results.map((p) {
+        final vibe = _detectVibe(p.notes ?? '');
+        final vibeColor = _vibeColor(vibe);
 
-    if (results.isEmpty) {
-      return const Expanded(
-        child: Center(
-          child: Text(
-            "Belum ada rekomendasi.\nIsi form di atas dulu",
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
-
-    return Expanded(
-      child: ListView.builder(
-        itemCount: results.length,
-        itemBuilder: (context, i) {
-          final p = results[i];
-          final vibe = _detectVibe(p.notes ?? '');
-          final vibeColor = _vibeColor(vibe);
-
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: ListTile(
-              leading: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: vibeColor.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  vibe,
-                  style: TextStyle(
-                    color: vibeColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                  ),
+        return Card(
+          margin: const EdgeInsets.only(bottom: 12),
+          child: ListTile(
+            leading: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: vibeColor.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                vibe,
+                style: TextStyle(
+                  color: vibeColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
                 ),
               ),
-              title: Text(p.perfume),
-              subtitle: Text(p.brand),
-              trailing: p.price != null
-                  ? Text(
-                      "Rp ${_idFormat.format(p.price!.round())}",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: cs.primary,
-                      ),
-                    )
-                  : null,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => PerfumeDetailPage(perfume: p),
-                  ),
-                );
-              },
             ),
-          );
-        },
-      ),
+            title: Text(p.perfume),
+            subtitle: Text(p.brand),
+            trailing: p.price != null
+                ? Text(
+                    "Rp ${_idFormat.format(p.price!.round())}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: cs.primary,
+                    ),
+                  )
+                : null,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => PerfumeDetailPage(perfume: p),
+                ),
+              );
+            },
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -455,23 +462,41 @@ class _AromindHomePageState extends State<AromindHomePage> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(padding: const EdgeInsets.all(16), child: _buildHeader(cs)),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    _buildFormCard(cs),
-                    const SizedBox(height: 12),
-                    if (loading) const LinearProgressIndicator(),
-                    if (!loading) _buildResultArea(cs),
-                  ],
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(cs),
+              const SizedBox(height: 16),
+              _buildFormCard(cs),
+              const SizedBox(height: 12),
+              if (loading) const LinearProgressIndicator(),
+              if (!loading && errorMessage != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: Text(
+                      errorMessage!,
+                      style: const TextStyle(color: Colors.red),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
+              if (!loading && errorMessage == null && results.isEmpty)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 40),
+                  child: Center(
+                    child: Text(
+                      "Belum ada rekomendasi.\nIsi form di atas dulu",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              if (!loading && results.isNotEmpty) _buildResultList(cs),
+            ],
+          ),
         ),
       ),
     );

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penjelasan Teknis Aromind AI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+            color: #222;
+            padding: 30px;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24pt;
+            color: #00856b;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 12pt;
+        }
+
+        .download-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 30px;
+            padding: 10px 25px;
+            background: #00856b;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 11pt;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: #006b56;
+        }
+
+        .section {
+            border: 2px solid #00856b;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #00856b;
+            padding-bottom: 10px;
+        }
+
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18pt;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #00856b;
+        }
+
+        .qa-box {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .question {
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+
+        .answer {
+            color: #333;
+        }
+
+        .answer b {
+            color: #00856b;
+        }
+
+        .point {
+            background: #f8fafc;
+            border-left: 4px solid #00856b;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+        }
+
+        .point-title {
+            font-weight: 700;
+            color: #00856b;
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 9pt;
+        }
+
+        th {
+            background: #00856b;
+            color: #fff;
+            padding: 8px 6px;
+            text-align: left;
+        }
+
+        td {
+            padding: 8px 6px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .file-badge {
+            background: #00856b;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 8pt;
+            font-family: monospace;
+        }
+
+        .line-num {
+            font-family: monospace;
+            color: #b45309;
+            font-weight: 700;
+        }
+
+        code {
+            background: #fef3c7;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #92400e;
+            font-size: 9pt;
+        }
+
+        .highlight {
+            background: #fef9c3;
+            border: 1px solid #fde047;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+
+        .highlight h4 {
+            color: #854d0e;
+            margin-bottom: 8px;
+            font-size: 10pt;
+        }
+
+        .flow-box {
+            background: #e0f2fe;
+            border: 1px solid #7dd3fc;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 9pt;
+            margin: 10px 0;
+        }
+
+        .pm {
+            background: #6366f1;
+        }
+
+        .ml {
+            background: #f59e0b;
+        }
+
+        .backend {
+            background: #10b981;
+        }
+
+        .frontend {
+            background: #3b82f6;
+        }
+
+        .faq {
+            background: #ef4444;
+        }
+
+        ul {
+            margin: 8px 0 8px 20px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #999;
+            font-size: 9pt;
+        }
+
+        @media print {
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="content">
+        <h1>🌸 Aromind AI</h1>
+        <p class="subtitle">Penjelasan Teknis Sistem Rekomendasi Parfum</p>
+
+        <button class="download-btn" onclick="downloadPDF()">📥 Download PDF</button>
+
+        <!-- FAQ -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon faq">❓</div>
+                <div class="section-title">Pertanyaan yang Sering Ditanyakan Dosen</div>
+            </div>
+
+            <div class="qa-box">
+                <div class="question">Q: "Menggunakan ML model apa?"</div>
+                <div class="answer">
+                    <b>Jawaban:</b> Sistem ini menggunakan <b>Rule-Based Scoring Algorithm</b>, bukan Machine Learning
+                    tradisional (neural network/decision tree).<br><br>
+                    <b>Alasan pemilihan:</b>
+                    <ul>
+                        <li>Lebih <b>interpretable</b> - bisa dijelaskan mengapa parfum X direkomendasikan</li>
+                        <li>Tidak butuh training data besar (dataset hanya ~100 parfum)</li>
+                        <li>Mudah di-tuning dan diperbaiki</li>
+                    </ul>
+                    <b>Untuk fitur OCR:</b> Menggunakan <b>Gemini 2.0 Flash</b> (Google Generative AI) sebagai Vision
+                    Language Model untuk membaca teks dari gambar parfum.
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="question">Q: "Kenapa bisa munculin parfum dari cuaca? Di dataset kan gak ada kolom cuaca?"
+                </div>
+                <div class="answer">
+                    <b>Jawaban:</b> Benar, dataset <b>TIDAK memiliki kolom cuaca</b>. Yang dilakukan adalah
+                    <b>MAPPING</b> cuaca ke aroma notes yang sudah ada di dataset.<br><br>
+                    <b>Logikanya:</b>
+                    <ul>
+                        <li>Cuaca PANAS → cari parfum dengan notes: <b>citrus, fresh, aquatic</b></li>
+                        <li>Cuaca HUJAN → cari parfum dengan notes: <b>woody, warm, amber</b></li>
+                    </ul>
+                    <b>Implementasi:</b> Di <code>main.py</code> baris 82-95, cuaca di-convert menjadi
+                    <code>target_tags</code>, lalu tags ini dicocokkan dengan kolom "top notes", "mid notes", "base
+                    notes" di dataset.<br><br>
+                    <b>Dasar teori:</b> Berdasarkan prinsip parfumeri bahwa aroma tertentu lebih cocok di cuaca
+                    tertentu.
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="question">Q: "Manggil backend-nya dimana?"</div>
+                <div class="answer">
+                    <b>Jawaban:</b> Backend dipanggil dari file <code>aromind_api.dart</code><br><br>
+                    <b>Flow lengkap:</b>
+                    <ol>
+                        <li>User klik tombol "Cari parfum terbaik" di <code>main.dart</code> baris 147</li>
+                        <li>Memanggil <code>api.getRecommendations()</code></li>
+                        <li>Di <code>aromind_api.dart</code> baris 24, request POST dikirim ke Railway</li>
+                        <li>Backend memproses dan mengembalikan JSON</li>
+                        <li>Response di-parse menjadi object <code>Perfume</code> dan ditampilkan</li>
+                    </ol>
+                    <b>URL Backend:</b> <code>aromind_api.dart</code> baris 13:<br>
+                    <code>https://aromindbackend-production.up.railway.app</code>
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <div class="question">Q: "Match score untuk memunculkan hasil parfum gimana?"</div>
+                <div class="answer">
+                    <b>Jawaban:</b> Setiap parfum dihitung skor-nya:
+                    <table>
+                        <tr>
+                            <th>Kriteria</th>
+                            <th>Poin</th>
+                            <th>Penjelasan</th>
+                        </tr>
+                        <tr>
+                            <td>Tag aroma cocok</td>
+                            <td><b>+2</b> per tag</td>
+                            <td>Jika notes parfum mengandung target tag (misal "citrus")</td>
+                        </tr>
+                        <tr>
+                            <td>Budget sesuai</td>
+                            <td><b>+1</b></td>
+                            <td>Jika harga dalam range budget_min - budget_max</td>
+                        </tr>
+                        <tr>
+                            <td>Harga terlalu mahal</td>
+                            <td><b>-1</b></td>
+                            <td>Jika harga > 1.5x budget_max</td>
+                        </tr>
+                    </table>
+                    <b>Hasil:</b> Parfum dengan skor > 0 masuk list, diurutkan dari skor tertinggi, ambil 10
+                    teratas.<br>
+                    <b>Lokasi kode:</b> <code>main.py</code> baris 109-138
+                </div>
+            </div>
+        </section>
+
+        <!-- PM -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon pm">📐</div>
+                <div class="section-title">PM & System Architect</div>
+            </div>
+
+            <div class="point">
+                <div class="point-title">Arsitektur Sistem (3-Tier)</div>
+                <div class="flow-box">
+                    [Flutter App] → HTTP Request → [FastAPI Backend] → [CSV Dataset]
+                </div>
+                <table>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Teknologi</th>
+                        <th>Deploy</th>
+                    </tr>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>Flutter (Dart)</td>
+                        <td>Web / Mobile</td>
+                    </tr>
+                    <tr>
+                        <td>Backend</td>
+                        <td>FastAPI (Python)</td>
+                        <td>Railway</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>CSV File</td>
+                        <td>Di dalam container</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- ML -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon ml">🧠</div>
+                <div class="section-title">ML Engineer & Data Analyst</div>
+            </div>
+
+            <div class="point">
+                <div class="point-title">1. MAPPING: Cuaca → Aroma Tags</div>
+                <div class="highlight">
+                    <h4>⚠️ Cuaca TIDAK ada di dataset. Ini adalah DOMAIN KNOWLEDGE yang di-hardcode.</h4>
+                </div>
+                <table>
+                    <tr>
+                        <th>Input Cuaca</th>
+                        <th>Target Tags</th>
+                        <th>Alasan Parfumeri</th>
+                    </tr>
+                    <tr>
+                        <td>panas, terik</td>
+                        <td>citrus, fresh, aquatic</td>
+                        <td>Aroma ringan & menyegarkan</td>
+                    </tr>
+                    <tr>
+                        <td>hujan, mendung</td>
+                        <td>woody, warm, amber, sweet</td>
+                        <td>Aroma hangat untuk cuaca dingin</td>
+                    </tr>
+                </table>
+                <p style="margin-top:10px;"><b>Kode:</b> <span class="file-badge">main.py</span> baris <span
+                        class="line-num">82-89</span></p>
+            </div>
+
+            <div class="point">
+                <div class="point-title">2. ALGORITMA SCORING - Step by Step</div>
+                <div class="highlight">
+                    <h4>🔢 Rumus: Skor = (Tag Match × 2) + Budget Match (1) - Penalti (1)</h4>
+                </div>
+                <table>
+                    <tr>
+                        <th>Step</th>
+                        <th>File</th>
+                        <th>Baris</th>
+                        <th>Proses</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">109-113</td>
+                        <td>Gabungkan notes: top + mid + base (lowercase)</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">115-117</td>
+                        <td>Cek tag match: <code>if tag in notes: score += 2</code></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">119-127</td>
+                        <td>Cek budget: <code>if budget_min <= price <= budget_max: score += 1</code></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">125-127</td>
+                        <td>Penalti: <code>if price > budget_max * 1.5: score -= 1</code></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">129-130</td>
+                        <td>Filter: Hanya <code>score > 0</code> yang masuk</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">133</td>
+                        <td>Urutkan: <code>sorted(..., reverse=True)</code></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">136</td>
+                        <td>Ambil top 10: <code>results[:10]</code></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="point">
+                <div class="point-title">3. Contoh Perhitungan Skor</div>
+                <p><b>Input:</b> Cuaca=panas, Aktivitas=kerja, Budget=100.000-300.000</p>
+                <p><b>Target tags:</b> [citrus, fresh, aquatic, clean, soft]</p>
+                <div class="highlight">
+                    <h4>Parfum A: Notes="fresh citrus, clean musk", Harga=150.000</h4>
+                    <ul>
+                        <li>Tag "fresh" ada → +2</li>
+                        <li>Tag "citrus" ada → +2</li>
+                        <li>Tag "clean" ada → +2</li>
+                        <li>Harga dalam budget → +1</li>
+                        <li><b>Total: 7 poin ✓</b></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Backend -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon backend">⚙️</div>
+                <div class="section-title">Backend Developer</div>
+            </div>
+
+            <div class="point">
+                <div class="point-title">Flow Pemanggilan Backend (DETAIL)</div>
+                <table>
+                    <tr>
+                        <th>Step</th>
+                        <th>File</th>
+                        <th>Baris</th>
+                        <th>Kode</th>
+                        <th>Penjelasan</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><span class="file-badge">main.dart</span></td>
+                        <td class="line-num">147</td>
+                        <td><code>api.getRecommendations(...)</code></td>
+                        <td>User klik tombol</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><span class="file-badge">aromind_api.dart</span></td>
+                        <td class="line-num">13</td>
+                        <td><code>baseUrl = '..railway.app'</code></td>
+                        <td>URL backend</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><span class="file-badge">aromind_api.dart</span></td>
+                        <td class="line-num">24-35</td>
+                        <td><code>_client.post(uri, body: jsonEncode(...))</code></td>
+                        <td>Kirim HTTP POST</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><span class="file-badge">main.py</span></td>
+                        <td class="line-num">68</td>
+                        <td><code>@app.post("/recommend")</code></td>
+                        <td>Backend terima request</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><span class="file-badge">aromind_api.dart</span></td>
+                        <td class="line-num">41-47</td>
+                        <td><code>jsonDecode(resp.body)</code></td>
+                        <td>Parse response</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Frontend -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon frontend">📱</div>
+                <div class="section-title">Frontend Developer</div>
+            </div>
+
+            <div class="point">
+                <div class="point-title">State Management & Data Flow</div>
+                <table>
+                    <tr>
+                        <th>File</th>
+                        <th>Baris</th>
+                        <th>Variable</th>
+                        <th>Fungsi</th>
+                    </tr>
+                    <tr>
+                        <td><span class="file-badge">main.dart</span></td>
+                        <td class="line-num">101-103</td>
+                        <td><code>activity, weather, preference</code></td>
+                        <td>Simpan pilihan user</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-badge">main.dart</span></td>
+                        <td class="line-num">105-107</td>
+                        <td><code>loading, results</code></td>
+                        <td>Status & hasil rekomendasi</td>
+                    </tr>
+                    <tr>
+                        <td><span class="file-badge">perfume.dart</span></td>
+                        <td class="line-num">58-67</td>
+                        <td><code>Perfume.fromJson()</code></td>
+                        <td>Parse JSON → Object</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <div class="footer">
+            © 2024 Aromind AI - Dokumen Teknis untuk Presentasi
+        </div>
+    </div>
+
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('content');
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Aromind_AI_Penjelasan_Detail.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+
+</html>

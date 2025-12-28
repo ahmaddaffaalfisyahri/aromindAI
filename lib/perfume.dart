@@ -283,17 +283,24 @@ class Perfume {
 
   /// naive note tier splitting: first 2 -> top, next 2-3 -> middle, rest -> base
   Map<String, String> extractNoteTiers() {
-    final parts = (notes ?? '')
+    // Clean up notes first - remove trailing dashes and clean up
+    String cleanNotes = (notes ?? '')
+        .replaceAll(RegExp(r'\s*-\s*-\s*'), ' ') // remove "- -" patterns
+        .replaceAll(RegExp(r'\s*-\s*$'), '') // remove trailing dashes
+        .replaceAll(RegExp(r'^\s*-\s*'), '') // remove leading dashes
+        .trim();
+
+    final parts = cleanNotes
         .toLowerCase()
         .split(',')
         .map((s) => s.trim())
-        .where((s) => s.isNotEmpty)
+        .where((s) => s.isNotEmpty && s != '-')
         .toList();
     final top = parts.take(2).join(', ');
-    final middle = parts.length > 2 ? parts.skip(2).take(3).join(', ') : '';
-    final base = parts.length > 5
-        ? parts.skip(5).join(', ')
-        : (parts.length > 4 ? parts.skip(4).join(', ') : '');
+    final middle = parts.length > 2 ? parts.skip(2).take(2).join(', ') : '';
+    final base = parts.length > 4
+        ? parts.skip(4).join(', ')
+        : (parts.length > 3 ? parts.skip(3).join(', ') : '');
     return {'top': top, 'middle': middle, 'base': base};
   }
 
