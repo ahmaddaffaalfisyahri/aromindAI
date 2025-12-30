@@ -486,6 +486,116 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="point">
+                <div class="point-title">4. Sistem Deteksi Kategori Aroma (Fresh, Woody, Sweet, Floral)</div>
+                <div class="highlight">
+                    <h4>🎯 Bagaimana sistem mendeteksi parfum cocok untuk kategori tertentu?</h4>
+                </div>
+                <p>Backend menggunakan <b>keyword matching</b> dari kolom "notes" di dataset untuk menentukan kategori
+                    parfum:</p>
+                <table>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Keywords yang Dicari</th>
+                        <th>Contoh Notes</th>
+                    </tr>
+                    <tr>
+                        <td><b>Fresh</b></td>
+                        <td>citrus, lemon, bergamot, lime, orange, grapefruit, aquatic, marine, fresh, green, mint</td>
+                        <td>"fresh citrus, bergamot, mint"</td>
+                    </tr>
+                    <tr>
+                        <td><b>Woody</b></td>
+                        <td>woody, wood, cedar, sandalwood, oud, vetiver, patchouli, oakmoss, pine, birch, amber</td>
+                        <td>"woody amber, cedar, patchouli"</td>
+                    </tr>
+                    <tr>
+                        <td><b>Sweet</b></td>
+                        <td>vanilla, sweet, caramel, honey, sugar, gourmand, toffee, candy, chocolate</td>
+                        <td>"sweet vanilla, caramel, honey"</td>
+                    </tr>
+                    <tr>
+                        <td><b>Floral</b></td>
+                        <td>rose, jasmine, floral, flower, lily, peony, tuberose, iris, violet, magnolia, orchid</td>
+                        <td>"jasmine, rose petals, tuberose"</td>
+                    </tr>
+                </table>
+                <p style="margin-top:10px;"><b>Logika:</b> Jika user memilih preferensi "Woody", backend mencari parfum
+                    yang notes-nya mengandung keyword woody.</p>
+                <p><b>Kode:</b> <span class="file-badge">main.py</span> baris <span class="line-num">82-95</span>
+                    (mapping preference → target_tags)</p>
+            </div>
+
+            <div class="point">
+                <div class="point-title">5. Cara Mendapatkan Skor Tertinggi</div>
+                <div class="highlight">
+                    <h4>🏆 Parfum dengan skor tertinggi adalah yang paling BANYAK cocok dengan kriteria user</h4>
+                </div>
+                <p><b>Faktor yang mempengaruhi skor:</b></p>
+                <table>
+                    <tr>
+                        <th>Faktor</th>
+                        <th>Poin</th>
+                        <th>Cara Memaksimalkan</th>
+                    </tr>
+                    <tr>
+                        <td>Tag Match (Preferensi)</td>
+                        <td><b>+2</b> per tag</td>
+                        <td>Parfum dengan banyak keyword yang match akan dapat skor lebih tinggi</td>
+                    </tr>
+                    <tr>
+                        <td>Tag Match (Cuaca)</td>
+                        <td><b>+2</b> per tag</td>
+                        <td>Parfum yang cocok dengan cuaca (misal: citrus untuk panas) dapat bonus</td>
+                    </tr>
+                    <tr>
+                        <td>Tag Match (Aktivitas)</td>
+                        <td><b>+2</b> per tag</td>
+                        <td>Parfum yang cocok dengan aktivitas (misal: clean untuk kerja) dapat bonus</td>
+                    </tr>
+                    <tr>
+                        <td>Budget Sesuai</td>
+                        <td><b>+1</b></td>
+                        <td>Harga parfum dalam range budget user</td>
+                    </tr>
+                    <tr>
+                        <td>Penalti Harga</td>
+                        <td><b>-1</b></td>
+                        <td>Jika harga > 1.5x budget max, parfum kehilangan poin</td>
+                    </tr>
+                </table>
+                <div class="highlight" style="margin-top: 15px;">
+                    <h4>📊 Contoh: Bagaimana Parfum Bisa Mendapat Skor 9?</h4>
+                    <p><b>Input:</b> Preferensi=Woody, Cuaca=Hujan, Aktivitas=Date, Budget=100k-300k</p>
+                    <p><b>Target Tags:</b> woody, warm, amber, sweet, romantic, sensual</p>
+                    <ul>
+                        <li>Notes parfum: "woody amber, warm vanilla, sweet musk, romantic rose"</li>
+                        <li>Tag "woody" → +2</li>
+                        <li>Tag "amber" → +2</li>
+                        <li>Tag "warm" → +2</li>
+                        <li>Tag "sweet" → +2</li>
+                        <li>Harga 200.000 dalam budget → +1</li>
+                        <li><b>Total Skor: 9 poin</b> 🏆</li>
+                    </ul>
+                </div>
+                <p style="margin-top:10px;"><b>Kode:</b> <span class="file-badge">main.py</span> baris <span
+                        class="line-num">109-138</span></p>
+            </div>
+
+            <div class="point">
+                <div class="point-title">6. Label Tampilan di Frontend</div>
+                <p>Setelah backend mengembalikan hasil, frontend menampilkan label kategori berdasarkan <b>preferensi
+                        yang dipilih user</b>:</p>
+                <div class="flow-box">
+                    User pilih "Woody" → Backend filter parfum woody → Frontend tampilkan label "Woody" untuk semua
+                    hasil
+                </div>
+                <p><b>Kode:</b> <span class="file-badge">main.dart</span> baris <span class="line-num">629-639</span>
+                </p>
+                <p style="margin-top:8px;"><b>Alasan:</b> Backend sudah memfilter parfum berdasarkan preferensi, jadi
+                    label langsung mengikuti pilihan user agar konsisten.</p>
+            </div>
         </section>
 
         <!-- Backend -->

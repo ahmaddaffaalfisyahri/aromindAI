@@ -106,6 +106,9 @@ class _AromindHomePageState extends State<AromindHomePage> {
   String? errorMessage;
   List<Perfume> results = [];
 
+  // Sorting option: 'price_asc' (termurah), 'price_desc' (termahal), 'score' (default berdasarkan skor)
+  String sortBy = 'price_asc';
+
   final AromindApi api = AromindApi();
   final ImagePicker _picker = ImagePicker();
   final NumberFormat _idFormat = NumberFormat.decimalPattern('id_ID');
@@ -213,12 +216,129 @@ class _AromindHomePageState extends State<AromindHomePage> {
     }
   }
 
-  String _detectVibe(String notes) {
+  String _detectVibe(String notes, {String? userPreference}) {
     final n = notes.toLowerCase();
-    if (n.contains("citrus") || n.contains("lemon")) return "Fresh";
-    if (n.contains("vanilla") || n.contains("sweet")) return "Sweet";
-    if (n.contains("wood") || n.contains("cedar")) return "Woody";
-    if (n.contains("rose") || n.contains("jasmine")) return "Floral";
+
+    // Use scoring system for more accurate detection
+    int freshScore = 0;
+    int sweetScore = 0;
+    int woodyScore = 0;
+    int floralScore = 0;
+
+    // Fresh keywords
+    final freshKeywords = [
+      'citrus',
+      'lemon',
+      'bergamot',
+      'lime',
+      'orange',
+      'grapefruit',
+      'aquatic',
+      'marine',
+      'fresh',
+      'green',
+      'mint',
+    ];
+    for (final k in freshKeywords) {
+      if (n.contains(k)) freshScore += 2;
+    }
+
+    // Sweet keywords
+    final sweetKeywords = [
+      'vanilla',
+      'sweet',
+      'caramel',
+      'honey',
+      'sugar',
+      'gourmand',
+      'toffee',
+      'candy',
+      'chocolate',
+    ];
+    for (final k in sweetKeywords) {
+      if (n.contains(k)) sweetScore += 2;
+    }
+
+    // Woody keywords (more variations to catch "woody" properly)
+    final woodyKeywords = [
+      'woody',
+      'wood',
+      'cedar',
+      'sandalwood',
+      'oud',
+      'vetiver',
+      'patchouli',
+      'oakmoss',
+      'pine',
+      'birch',
+      'amber',
+    ];
+    for (final k in woodyKeywords) {
+      if (n.contains(k)) woodyScore += 2;
+    }
+
+    // Floral keywords
+    final floralKeywords = [
+      'rose',
+      'jasmine',
+      'floral',
+      'flower',
+      'lily',
+      'peony',
+      'tuberose',
+      'iris',
+      'violet',
+      'magnolia',
+      'orchid',
+    ];
+    for (final k in floralKeywords) {
+      if (n.contains(k)) floralScore += 2;
+    }
+
+    // Give significant bonus to user's preference if notes contain related keywords
+    // This ensures parfums returned by backend for that preference show the correct label
+    if (userPreference != null) {
+      final pref = userPreference.toLowerCase();
+      const preferenceBonus =
+          50; // Very large bonus to ensure user preference wins
+
+      switch (pref) {
+        case 'fresh':
+          if (freshScore > 0) freshScore += preferenceBonus;
+          break;
+        case 'sweet':
+          if (sweetScore > 0) sweetScore += preferenceBonus;
+          break;
+        case 'woody':
+          if (woodyScore > 0) woodyScore += preferenceBonus;
+          break;
+        case 'floral':
+          if (floralScore > 0) floralScore += preferenceBonus;
+          break;
+        case 'oriental':
+          // Oriental often overlaps with woody/sweet/spicy
+          if (woodyScore > 0) woodyScore += preferenceBonus;
+          if (sweetScore > 0) sweetScore += preferenceBonus ~/ 2;
+          break;
+      }
+    }
+
+    // Find the highest score
+    final scores = {
+      'Woody': woodyScore,
+      'Fresh': freshScore,
+      'Sweet': sweetScore,
+      'Floral': floralScore,
+    };
+
+    // Sort by score descending
+    final sorted = scores.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+
+    // Return highest score if > 0, otherwise All-rounder
+    if (sorted.first.value > 0) {
+      return sorted.first.key;
+    }
     return "All-rounder";
   }
 
@@ -336,9 +456,19 @@ class _AromindHomePageState extends State<AromindHomePage> {
                   Expanded(
                     child: TextFormField(
                       controller: budgetMinController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Budget Min (Rp)",
-                        prefixIcon: Icon(Icons.savings),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            'Rp',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[700],
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -351,9 +481,19 @@ class _AromindHomePageState extends State<AromindHomePage> {
                   Expanded(
                     child: TextFormField(
                       controller: budgetMaxController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: "Budget Max (Rp)",
-                        prefixIcon: Icon(Icons.attach_money),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            'Rp',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[700],
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -400,52 +540,145 @@ class _AromindHomePageState extends State<AromindHomePage> {
     );
   }
 
-  Widget _buildResultList(ColorScheme cs) {
-    return Column(
-      children: results.map((p) {
-        final vibe = _detectVibe(p.notes ?? '');
-        final vibeColor = _vibeColor(vibe);
+  List<Perfume> get sortedResults {
+    final list = List<Perfume>.from(results);
+    switch (sortBy) {
+      case 'price_asc':
+        // Termurah dulu (harga null di akhir)
+        list.sort((a, b) {
+          if (a.price == null && b.price == null) return 0;
+          if (a.price == null) return 1;
+          if (b.price == null) return -1;
+          return a.price!.compareTo(b.price!);
+        });
+        break;
+      case 'price_desc':
+        // Termahal dulu (harga null di akhir)
+        list.sort((a, b) {
+          if (a.price == null && b.price == null) return 0;
+          if (a.price == null) return 1;
+          if (b.price == null) return -1;
+          return b.price!.compareTo(a.price!);
+        });
+        break;
+      case 'score':
+      default:
+        // Berdasarkan skor tertinggi
+        list.sort((a, b) => b.score.compareTo(a.score));
+    }
+    return list;
+  }
 
-        return Card(
-          margin: const EdgeInsets.only(bottom: 12),
-          child: ListTile(
-            leading: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+  Widget _buildSortDropdown(ColorScheme cs) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Icon(Icons.sort, color: cs.primary, size: 20),
+          const SizedBox(width: 8),
+          Text(
+            'Urutkan:',
+            style: TextStyle(fontWeight: FontWeight.w600, color: cs.primary),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
-                color: vibeColor.withValues(alpha: 0.15),
+                color: cs.primaryContainer.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
-                vibe,
-                style: TextStyle(
-                  color: vibeColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: sortBy,
+                  isExpanded: true,
+                  icon: Icon(Icons.arrow_drop_down, color: cs.primary),
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'price_asc',
+                      child: Text('Termurah', style: TextStyle(fontSize: 14)),
+                    ),
+                    DropdownMenuItem(
+                      value: 'price_desc',
+                      child: Text('Termahal', style: TextStyle(fontSize: 14)),
+                    ),
+                    DropdownMenuItem(
+                      value: 'score',
+                      child: Text(
+                        'Skor Tertinggi',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  ],
+                  onChanged: (v) {
+                    if (v != null) setState(() => sortBy = v);
+                  },
                 ),
               ),
             ),
-            title: Text(p.perfume),
-            subtitle: Text(p.brand),
-            trailing: p.price != null
-                ? Text(
-                    "Rp ${_idFormat.format(p.price!.round())}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: cs.primary,
-                    ),
-                  )
-                : null,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => PerfumeDetailPage(perfume: p),
-                ),
-              );
-            },
           ),
-        );
-      }).toList(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildResultList(ColorScheme cs) {
+    return Column(
+      children: [
+        _buildSortDropdown(cs),
+        ...sortedResults.map((p) {
+          // Use user's preference as label directly (backend already filtered by preference)
+          // Only fallback to scoring if no preference selected
+          String vibe;
+          if (preference != null && preference!.isNotEmpty) {
+            // Capitalize first letter for display
+            vibe = preference![0].toUpperCase() + preference!.substring(1);
+          } else {
+            vibe = _detectVibe(p.notes ?? '', userPreference: preference);
+          }
+          final vibeColor = _vibeColor(vibe);
+
+          return Card(
+            margin: const EdgeInsets.only(bottom: 12),
+            child: ListTile(
+              leading: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: vibeColor.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  vibe,
+                  style: TextStyle(
+                    color: vibeColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              title: Text(p.perfume),
+              subtitle: Text(p.brand),
+              trailing: p.price != null
+                  ? Text(
+                      "Rp ${_idFormat.format(p.price!.round())}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: cs.primary,
+                      ),
+                    )
+                  : null,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PerfumeDetailPage(perfume: p),
+                  ),
+                );
+              },
+            ),
+          );
+        }),
+      ],
     );
   }
 
